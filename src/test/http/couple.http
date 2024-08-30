@@ -1,0 +1,9 @@
+### 커플 정보 상세 조회
+GET {{url}}/couple/detail
+Content-Type: application/json
+Member-Code: eyJubyI6MSwibmFtZSI6Im5hbWUiLCJhY2NvdW50IjoiYWNjb3VudCJ9
+
+### 커플 정보 상세 조회
+GET {{url}}/couple/lover
+Content-Type: application/json
+Member-Code: eyJubyI6MSwibmFtZSI6Im5hbWUiLCJhY2NvdW50IjoiYWNjb3VudCJ9
