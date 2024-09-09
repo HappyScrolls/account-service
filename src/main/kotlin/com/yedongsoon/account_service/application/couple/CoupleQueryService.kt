@@ -1,4 +1,4 @@
-package com.yedongsoon.account_service.application
+package com.yedongsoon.account_service.application.couple
 
 import com.yedongsoon.account_service.domain.couple.Couple
 import com.yedongsoon.account_service.domain.couple.CoupleRepository

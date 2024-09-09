@@ -1,6 +1,6 @@
 package com.yedongsoon.account_service.presentation.handler
 
-import com.yedongsoon.account_service.application.CoupleQueryService
+import com.yedongsoon.account_service.application.couple.CoupleQueryService
 import com.yedongsoon.account_service.presentation.extension.extractMemberCodeHeader
 import com.yedongsoon.account_service.presentation.handler.model.CoupleResponse
 import com.yedongsoon.account_service.presentation.handler.model.MemberResponse

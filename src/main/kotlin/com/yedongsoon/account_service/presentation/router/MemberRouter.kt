@@ -1,6 +1,6 @@
 package com.yedongsoon.account_service.presentation.router
 
-import com.yedongsoon.account_service.presentation.handler.CoupleHandler
+import com.yedongsoon.account_service.presentation.handler.MemberHandler
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.MediaType
@@ -9,13 +9,12 @@ import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.coRouter
 
 @Configuration
-class CoupleRouter(private val coupleHandler: CoupleHandler) {
+class MemberRouter(private val memberHandler: MemberHandler) {
     @Bean
     fun coupleRoute(): RouterFunction<ServerResponse> {
         return coRouter {
-            (accept(MediaType.APPLICATION_JSON) and "/account-service/couple").nest {
-                GET("/detail", coupleHandler::getDetail)
-                GET("/lover", coupleHandler::getLover)
+            (accept(MediaType.APPLICATION_JSON) and "/account-service/member").nest {
+                POST("/additional-info", memberHandler::createAdditional)
             }
         }
     }
