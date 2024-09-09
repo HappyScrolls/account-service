@@ -11,7 +11,7 @@ import org.springframework.web.reactive.function.server.coRouter
 @Configuration
 class MemberRouter(private val memberHandler: MemberHandler) {
     @Bean
-    fun coupleRoute(): RouterFunction<ServerResponse> {
+    fun memberRoute(): RouterFunction<ServerResponse> {
         return coRouter {
             (accept(MediaType.APPLICATION_JSON) and "/account-service/member").nest {
                 POST("/additional-info", memberHandler::createAdditional)
