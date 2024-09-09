@@ -10,6 +10,8 @@ data class MemberResponse(
         val name: String?,
         val email: String?,
         val profilePhoto: String?,
+        val birthDate: LocalDate?,
+        val mobileNo:String?,
 ){
     companion object{
         fun from(member: Member)=MemberResponse(
@@ -18,6 +20,8 @@ data class MemberResponse(
                 name = member.name,
                 email = member.email,
                 profilePhoto = member.profilePhoto,
+                birthDate = member.birthDate,
+                mobileNo = member.mobileNo,
         )
     }
 }
