@@ -15,7 +15,7 @@ class WebFluxConfig {
         corsConfig.allowedOrigins = listOf("*")  // 모든 도메인 허용
         corsConfig.allowedMethods = listOf("*")  // 모든 HTTP 메서드 허용
         corsConfig.allowedHeaders = listOf("*")  // 모든 헤더 허용
-        corsConfig.allowCredentials = false      // 자격 증명 비허용
+        corsConfig.allowCredentials = true
 
         val source = UrlBasedCorsConfigurationSource()
         source.registerCorsConfiguration("/**", corsConfig)  // 모든 경로에 대해 CORS 설정 적용

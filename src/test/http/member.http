@@ -9,3 +9,8 @@ Member-Code: eyJubyI6MSwibmFtZSI6Im5hbWUiLCJhY2NvdW50IjoiYWNjb3VudCJ9
   "birthDate":"2024-01-01",
   "profilePhoto": null
 }
+
+### 추가 정보 기입
+GET {{url}}/account-service/member
+Content-Type: application/json
+Member-Code: eyJubyI6MSwibmFtZSI6Im5hbWUiLCJhY2NvdW50IjoiYWNjb3VudCJ9
