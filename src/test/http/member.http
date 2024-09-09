@@ -1,0 +1,11 @@
+### 추가 정보 기입
+POST {{url}}/account-service/member/additional-info
+Content-Type: application/json
+Member-Code: eyJubyI6MSwibmFtZSI6Im5hbWUiLCJhY2NvdW50IjoiYWNjb3VudCJ9
+
+{
+  "name" :  null,
+  "mobileNo": "123123123",
+  "birthDate":"2024-01-01",
+  "profilePhoto": null
+}
