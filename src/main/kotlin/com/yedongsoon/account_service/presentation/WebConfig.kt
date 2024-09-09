@@ -10,15 +10,15 @@ import org.springframework.web.cors.reactive.CorsWebFilter
 class WebFluxConfig {
 
     @Bean
-    fun corsFilter(): CorsWebFilter {
+    fun corsWebFilter(): CorsWebFilter {
         val corsConfig = CorsConfiguration()
-        corsConfig.allowedOrigins = listOf("*")  // 모든 도메인 허용
-        corsConfig.allowedMethods = listOf("*")  // 모든 HTTP 메서드 허용
-        corsConfig.allowedHeaders = listOf("*")  // 모든 헤더 허용
-        corsConfig.allowCredentials = true
+        corsConfig.allowedOriginPatterns = listOf("*") // 와일드카드 패턴을 사용하여 모든 도메인 허용
+        corsConfig.allowedMethods = listOf("*") // 모든 HTTP 메서드 허용
+        corsConfig.allowedHeaders = listOf("*") // 모든 헤더 허용
+        corsConfig.allowCredentials = true // 자격 증명 허용
 
         val source = UrlBasedCorsConfigurationSource()
-        source.registerCorsConfiguration("/**", corsConfig)  // 모든 경로에 대해 CORS 설정 적용
+        source.registerCorsConfiguration("/**", corsConfig) // 모든 경로에 대해 CORS 설정 적용
 
         return CorsWebFilter(source)
     }
