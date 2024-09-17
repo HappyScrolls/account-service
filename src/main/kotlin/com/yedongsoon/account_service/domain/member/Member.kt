@@ -1,6 +1,7 @@
 package com.yedongsoon.account_service.domain.member
 
 import com.yedongsoon.account_service.domain.member.model.MemberAdditionalInfoCommand
+import com.yedongsoon.account_service.domain.member.model.MemberInfoModifyCommand
 import jakarta.persistence.*
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -17,8 +18,7 @@ class Member(
 
     name: String?,
 
-    @Column(name = "email")
-    val email: String?,
+    email: String?,
 
     profilePhoto: String?,
 
@@ -32,6 +32,10 @@ class Member(
     @Column(name = "name")
     var name: String?=name
         private set
+
+    @Column(name = "email")
+    var email:String?= email
+        private set
     @Column(name = "profile_photo")
     var profilePhoto: String?=profilePhoto
         private set
@@ -43,6 +47,14 @@ class Member(
         private set
     fun createAdditionalInfo(command:MemberAdditionalInfoCommand){
         name= command.name?:name
+        profilePhoto=command.profilePhoto
+        birthDate=command.birthDate
+        mobileNo=command.mobileNo
+    }
+
+    fun modify(command: MemberInfoModifyCommand) {
+        name=command.name
+        email=command.email
         profilePhoto=command.profilePhoto
         birthDate=command.birthDate
         mobileNo=command.mobileNo

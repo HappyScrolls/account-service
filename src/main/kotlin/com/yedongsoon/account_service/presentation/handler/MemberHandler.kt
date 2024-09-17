@@ -5,6 +5,7 @@ import com.yedongsoon.account_service.application.member.MemberQueryService
 import com.yedongsoon.account_service.presentation.extension.extractMemberCodeHeader
 import com.yedongsoon.account_service.presentation.handler.model.CoupleResponse
 import com.yedongsoon.account_service.presentation.handler.model.MemberAdditionalInfoRequest
+import com.yedongsoon.account_service.presentation.handler.model.MemberInfoModifyRequest
 import com.yedongsoon.account_service.presentation.handler.model.MemberResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -28,5 +29,14 @@ class MemberHandler(
         val memberHeader = request.extractMemberCodeHeader()
         val result=memberQueryService.getMember(memberHeader.no)
         ServerResponse.ok().bodyValueAndAwait(MemberResponse.from(result))
+    }
+
+    suspend fun modifyMemberInfo(request: ServerRequest): ServerResponse = withContext(Dispatchers.IO) {
+        val memberHeader = request.extractMemberCodeHeader()
+        val command = request.awaitBodyOrNull<MemberInfoModifyRequest>()?.toCommand(memberHeader.no)
+                ?: throw IllegalArgumentException()
+
+        memberCommandService.modifyMemberInfo(command)
+        ServerResponse.ok().buildAndAwait()
     }
 }
