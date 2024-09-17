@@ -16,6 +16,8 @@ class CoupleRouter(private val coupleHandler: CoupleHandler) {
             (accept(MediaType.APPLICATION_JSON) and "/account-service/couple").nest {
                 GET("/detail", coupleHandler::getDetail)
                 GET("/lover", coupleHandler::getLover)
+                POST("", coupleHandler::createCouple)
+                POST("/info", coupleHandler::createCoupleInfo)
             }
         }
     }

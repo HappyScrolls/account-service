@@ -1,9 +1,9 @@
 package com.yedongsoon.account_service.presentation.handler
 
+import com.yedongsoon.account_service.application.couple.CoupleCommandService
 import com.yedongsoon.account_service.application.couple.CoupleQueryService
 import com.yedongsoon.account_service.presentation.extension.extractMemberCodeHeader
-import com.yedongsoon.account_service.presentation.handler.model.CoupleResponse
-import com.yedongsoon.account_service.presentation.handler.model.MemberResponse
+import com.yedongsoon.account_service.presentation.handler.model.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.springframework.stereotype.Service
@@ -12,6 +12,7 @@ import org.springframework.web.reactive.function.server.*
 @Service
 class CoupleHandler(
         private val coupleQueryService: CoupleQueryService,
+        private val coupleCommandService: CoupleCommandService,
 ) {
     suspend fun getDetail(request: ServerRequest): ServerResponse = withContext(Dispatchers.IO) {
         val memberHeader = request.extractMemberCodeHeader()
@@ -25,5 +26,26 @@ class CoupleHandler(
 
         val result = coupleQueryService.getLover(memberHeader.no)
         ServerResponse.ok().bodyValueAndAwait(MemberResponse.from(result))
+    }
+
+    suspend fun createCouple(request: ServerRequest): ServerResponse = withContext(Dispatchers.IO) {
+        val memberHeader = request.extractMemberCodeHeader()
+
+        val command = request.awaitBodyOrNull<CoupleCreateRequest>()?.toCommand(memberHeader.no)
+                ?: throw IllegalArgumentException()
+
+        coupleCommandService.createCouple(command)
+
+        ServerResponse.ok().buildAndAwait()
+    }
+    suspend fun createCoupleInfo(request: ServerRequest): ServerResponse = withContext(Dispatchers.IO) {
+        val memberHeader = request.extractMemberCodeHeader()
+
+        val command = request.awaitBodyOrNull<CoupleInfoCreateRequest>()?.toCommand(memberHeader.no)
+                ?: throw IllegalArgumentException()
+
+        coupleCommandService.createCoupleInfo(command)
+
+        ServerResponse.ok().buildAndAwait()
     }
 }
