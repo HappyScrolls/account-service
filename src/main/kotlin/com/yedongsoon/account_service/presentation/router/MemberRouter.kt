@@ -16,6 +16,7 @@ class MemberRouter(private val memberHandler: MemberHandler) {
             (accept(MediaType.APPLICATION_JSON) and "/account-service/member").nest {
                 GET("", memberHandler::getMember)
                 POST("/additional-info", memberHandler::createAdditional)
+                PUT("", memberHandler::modifyMemberInfo)
             }
         }
     }
