@@ -63,8 +63,8 @@ class CoupleHandler(
     suspend fun createInviteCode(request: ServerRequest): ServerResponse = withContext(Dispatchers.IO) {
         val memberHeader = request.extractMemberCodeHeader()
 
-        coupleCommandService.createInviteCode(memberHeader.no)
+        val code= coupleCommandService.createInviteCode(memberHeader.no)
 
-        ServerResponse.ok().buildAndAwait()
+        ServerResponse.ok().bodyValueAndAwait(code)
     }
 }
