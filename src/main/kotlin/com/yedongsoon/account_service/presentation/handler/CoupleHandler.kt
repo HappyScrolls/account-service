@@ -59,4 +59,12 @@ class CoupleHandler(
 
         ServerResponse.ok().buildAndAwait()
     }
+
+    suspend fun createInviteCode(request: ServerRequest): ServerResponse = withContext(Dispatchers.IO) {
+        val memberHeader = request.extractMemberCodeHeader()
+
+        coupleCommandService.createInviteCode(memberHeader.no)
+
+        ServerResponse.ok().buildAndAwait()
+    }
 }

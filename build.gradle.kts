@@ -37,7 +37,8 @@ dependencies {
 	testImplementation("org.springframework.restdocs:spring-restdocs-webtestclient:3.0.0")
 	testImplementation("com.ninja-squad:springmockk:4.0.2")
 	testImplementation("com.epages:restdocs-api-spec-openapi3-generator:0.17.1")
-}
+	implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
+	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")}
 
 kotlin {
 	compilerOptions {

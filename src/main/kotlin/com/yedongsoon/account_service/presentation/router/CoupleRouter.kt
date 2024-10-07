@@ -19,6 +19,7 @@ class CoupleRouter(private val coupleHandler: CoupleHandler) {
                 POST("", coupleHandler::createCouple)
                 POST("/info", coupleHandler::createCoupleInfo)
                 PUT("/info", coupleHandler::modifyCoupleInfo)
+                POST("/invite-code", coupleHandler::createInviteCode)
             }
         }
     }
