@@ -32,11 +32,11 @@ class CoupleCommandService(
     }
 
     suspend fun createCouple(command: CoupleCreateCommand) {
-        val memberNo = redisTemplate.opsForValue().getAndAwait(command.inviteCode) ?: throw InvalidInviteCodeException("유효하지 않은 초대코드입니다.")
-        coupleRepository.findByAccountNoAOrAccountNoB(memberNo.toInt(), command.accountNoB)?.let {
+        val memberNo = redisTemplate.opsForValue().getAndAwait(command.inviteCode)?.toInt() ?: throw InvalidInviteCodeException("유효하지 않은 초대코드입니다.")
+        coupleRepository.findByAccountNoAOrAccountNoB(memberNo, command.accountNoB)?.let {
             throw CoupleExistException("이미 커플이 존재하는 회원입니다.")
         }
-        coupleRepository.save(Couple.create(command))
+        coupleRepository.save(Couple.create(memberNo,command.accountNoB))
     }
 
     fun modifyCoupleInfo(memberNo: Int, command: CoupleInfoModifyCommand) {
@@ -48,8 +48,9 @@ class CoupleCommandService(
 
     }
 
-    suspend fun createInviteCode(memberNo: Int) {
+    suspend fun createInviteCode(memberNo: Int):String {
         val code=memberNo.toString()+LocalDateTime.now()
         redisTemplate.opsForValue().setAndAwait(code.encodeDtoToBase64(),memberNo.toString(), Duration.ofMinutes(5))
+        return code.encodeDtoToBase64()
     }
 }
