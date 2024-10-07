@@ -7,6 +7,7 @@ import com.yedongsoon.account_service.domain.couple.CoupleRepository
 import com.yedongsoon.account_service.domain.member.MemberRepository
 import com.yedongsoon.account_service.domain.member.model.CoupleCreateCommand
 import com.yedongsoon.account_service.domain.member.model.CoupleInfoCreateCommand
+import com.yedongsoon.account_service.domain.member.model.CoupleInfoModifyCommand
 import org.springframework.data.crossstore.ChangeSetPersister
 import org.springframework.stereotype.Service
 
@@ -26,5 +27,14 @@ class CoupleCommandService(
             throw CoupleExistException("이미 커플이 존재하는 회원입니다.")
         }
         coupleRepository.save(Couple.create(command))
+    }
+
+    fun modifyCoupleInfo(memberNo: Int, command: CoupleInfoModifyCommand) {
+        coupleRepository.findByAccountNoAOrAccountNoB(memberNo, memberNo)?.let{
+            it.modify(command)
+            coupleRepository.save(it)
+        } ?: throw CoupleExistException("이미 커플이 존재하는 회원입니다.")
+
+
     }
 }

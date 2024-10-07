@@ -2,6 +2,7 @@ package com.yedongsoon.account_service.domain.couple
 
 import com.yedongsoon.account_service.domain.member.model.CoupleCreateCommand
 import com.yedongsoon.account_service.domain.member.model.CoupleInfoCreateCommand
+import com.yedongsoon.account_service.domain.member.model.CoupleInfoModifyCommand
 import jakarta.persistence.*
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -46,6 +47,14 @@ class Couple(
         nickNameB=command.nickNameB
         startedAt=command.startedAt
         coupleImg=command.coupleImg
+    }
+
+    fun modify(command: CoupleInfoModifyCommand) {
+        if(command.name!=null) name=command.name
+        if(command.nickNameA!=null) nickNameA=command.nickNameA
+        if(command.nickNameB!=null)nickNameB=command.nickNameB
+        if(command.startedAt!=null)startedAt=command.startedAt
+        if(command.coupleImg!=null)coupleImg=command.coupleImg
     }
 
     companion object {

@@ -48,4 +48,15 @@ class CoupleHandler(
 
         ServerResponse.ok().buildAndAwait()
     }
+
+    suspend fun modifyCoupleInfo(request: ServerRequest): ServerResponse = withContext(Dispatchers.IO) {
+        val memberHeader = request.extractMemberCodeHeader()
+
+        val command = request.awaitBodyOrNull<CoupleInfoModifyRequest>()?.toCommand()
+                ?: throw IllegalArgumentException()
+
+        coupleCommandService.modifyCoupleInfo(memberHeader.no,command)
+
+        ServerResponse.ok().buildAndAwait()
+    }
 }
