@@ -58,9 +58,9 @@ class Couple(
     }
 
     companion object {
-        fun create(command: CoupleCreateCommand)=Couple(
-                accountNoA = command.accountNoA,
-                accountNoB = command.accountNoB
+        fun create(accountNoA:Int,accountNoB:Int)=Couple(
+                accountNoA = accountNoA,
+                accountNoB = accountNoB
         )
     }
 
