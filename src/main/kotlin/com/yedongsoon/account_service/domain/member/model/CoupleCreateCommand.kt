@@ -1,6 +1,7 @@
 package com.yedongsoon.account_service.domain.member.model
 
 data class CoupleCreateCommand(
-        val accountNoA: Int,
+        val inviteCode:String,
+        val accountNoA: Int?=null,
         val accountNoB: Int,
 )

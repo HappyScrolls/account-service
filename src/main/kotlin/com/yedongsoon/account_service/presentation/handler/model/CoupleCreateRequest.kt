@@ -4,10 +4,10 @@ import com.yedongsoon.account_service.domain.member.model.CoupleCreateCommand
 
 
 data class CoupleCreateRequest(
-        val requestAccountNo: Int,
+        val inviteCode: String,
 ){
     fun toCommand(memberNo:Int)=CoupleCreateCommand(
-            accountNoA = requestAccountNo,
+            inviteCode = inviteCode,
             accountNoB = memberNo,
     )
 }
